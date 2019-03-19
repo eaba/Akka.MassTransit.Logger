@@ -1,0 +1,1 @@
+# Akka.MassTransit.Logger
