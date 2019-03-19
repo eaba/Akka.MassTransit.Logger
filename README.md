@@ -1,1 +1,1 @@
-# Akka.MassTransit.Logger
+# Akka MassTransit Logger
