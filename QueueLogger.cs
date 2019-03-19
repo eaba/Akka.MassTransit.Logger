@@ -1,4 +1,4 @@
-﻿using MassTransit;
+using MassTransit;
 using System;
 using Akka.Actor;
 using Akka.Event;
@@ -48,27 +48,13 @@ namespace Akka.MassTransit.Logger
                     var dto = new Dto(data.ToImmutableDictionary());
                     if (_sendEndPoint != null)
                     {
-                        if (_logCache.Count > 0)
-                        {
-                            foreach (var log in _logCache)
-                            {
-                                await _sendEndPoint.Send(new Dto(log.ToImmutableDictionary()));
-                            }
-                            _logCache.Clear();
-                        }
+                        await DeCache();
                         await _sendEndPoint.Send(dto);
                     }
                     else
                     {
                         _sendEndPoint = await AkkaService.Bus.GetSendEndpoint(new Uri(queueUri));
-                        if(_logCache.Count > 0)
-                        {
-                            foreach (var log in _logCache)
-                            {
-                                await _sendEndPoint.Send(new Dto(log.ToImmutableDictionary()));
-                            }
-                            _logCache.Clear();
-                        }       
+                        await DeCache();
                         await _sendEndPoint.Send(dto);
                     }
                 }
@@ -85,6 +71,17 @@ namespace Akka.MassTransit.Logger
         private void Init(IActorRef sender)
         {            
             sender.Tell(new LoggerInitialized());
+        }
+        private async Task DeCache()
+        {
+            if (_logCache.Count > 0)
+            {
+                foreach (var log in _logCache)
+                {
+                    await _sendEndPoint.Send(new Dto(log.ToImmutableDictionary()));
+                }
+                _logCache.Clear();
+            }
         }
     }
 }
