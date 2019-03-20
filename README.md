@@ -2,7 +2,9 @@
 
 How To Use
 ---------------
-Add `Akka.MassTransit.Logger` as reference to your Akka.Net. Edit logging in hocon file
+Add `Akka.MassTransit.Logger` as reference to your Akka.Net project.
+
+Edit logging in hocon file
 E.G.:
 ```
 loggers = ["Akka.MassTransit.Logger.QueueLogger, Akka.MassTransit.Logger"]
