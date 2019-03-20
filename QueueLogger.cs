@@ -5,7 +5,6 @@ using Akka.Event;
 using Akka.Configuration;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-using v2.Message.Buses;
 using System.Collections.Immutable;
 namespace Akka.MassTransit.Logger
 {
