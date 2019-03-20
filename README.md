@@ -7,3 +7,5 @@ E.G.:
 ```
 loggers = ["Akka.MassTransit.Logger.QueueLogger, Akka.MassTransit.Logger"]
 queue-uri = "rabbitmq://localhost/logging_akka"
+```
+Start MassTransit and Set `AkkaService.Bus` to hold reference to the new MassTransit instance
